@@ -4,4 +4,5 @@
 
 ## day01
 实现功能：
-* 编写前端页面、设置github登录
+* 前端页面导航栏
+* [设置github登录](https://www.jianshu.com/p/ccb1a0ae2ce7)
