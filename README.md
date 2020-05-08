@@ -4,5 +4,5 @@
 
 ## day01
 实现功能：
-* 前端页面导航栏
+* 使用BootStrap制作前端页面导航栏
 * [设置github登录](https://www.jianshu.com/p/ccb1a0ae2ce7)
