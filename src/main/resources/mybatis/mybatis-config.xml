@@ -4,6 +4,6 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <typeAliases>
-        <typeAlias type="cn.yzx.community.pojo.User" alias="user"/>
+        <typeAlias type="cn.yzx.community.pojo.user" alias="user"/>
     </typeAliases>
 </configuration>

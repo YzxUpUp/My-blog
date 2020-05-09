@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.yzx.community.mapper.userMapper" >
 
-    <insert id="saveUser" parameterType="user">
-        insert into user(account_id,name,token,gmt_create,gmt_modify) values(#{name},#{accounId},#{token},#{gmtCreate},#{gmtModify});
-    </insert>
+    <select id="getUser" resultType="user">
+        select * from user where username = #{username} and password = #{password};
+    </select>
 
 </mapper>

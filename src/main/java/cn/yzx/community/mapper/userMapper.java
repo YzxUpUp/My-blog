@@ -1,10 +1,11 @@
 package cn.yzx.community.mapper;
 
-import cn.yzx.community.pojo.User;
-import org.apache.ibatis.annotations.Insert;
+import cn.yzx.community.pojo.user;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface userMapper {
-    void saveUser(User user);
+    user getUser(@Param("username") String username,
+                 @Param("password") String password);
 }
