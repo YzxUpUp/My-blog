@@ -22,6 +22,7 @@ public class GithubProvier {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
+            //根据符号进行切割，得出accessToken字符串
             return response.body().string().split("&")[0].split("=")[1];
         } catch (IOException e) {
             e.printStackTrace();
