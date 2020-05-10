@@ -1,6 +1,7 @@
 package cn.yzx.community.mapper;
 
 import cn.yzx.community.pojo.user;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
