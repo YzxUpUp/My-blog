@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.yzx.community.mapper.blogMapper" >
+
+    <insert id="addBlog" parameterType="blog">
+        insert into blog(title,value,create_time,modify_time,comment_count,view_count,like_count,tag,first_img)
+        values(#{title},#{value},#{createTime},#{modifyTime},#{commentCount},#{viewCount},#{likeCount},#{tag},#{firstImg});
+    </insert>
+
+    <select id="getAllBolg" resultType="blog">
+        select * from blog;
+    </select>
+
+</mapper>

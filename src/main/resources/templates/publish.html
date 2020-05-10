@@ -26,8 +26,6 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li th:if="${session.user != null}"><a th:href="@{/publish}" href="#">
-                    发布</a></li>
                 <li th:if="${session.user == null}"><a th:href="@{/login}" href="#">
                     登录</a></li>
                 <li class="dropdown" th:if="${session.user!=null}">
@@ -46,29 +44,40 @@
 <div class="container-fluid main" style="background-color: white">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-            <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 博客列表</h2>
+            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>发布</h2>
+
             <hr>
-            <div class="media" th:each="blog:${blogs}">
-                <div class="media-left media-middle">
-                    <a href="#">
-                        <img class="media-object img-rounded" th:src="${blog.firstImg}" src="../static/images/head.png" style="width: 300px;height: 150px">
-                    </a>
-                </div>
-                <div class="media-body">
-                    <h4 class="media-heading" th:text="${blog.title}">Mybatis快速入门</h4>
-                    <a href="#">点击进入博客</a>
-                    <div>
-                        <span class="text-desc">[[${blog.commentCount}]]个回复</span>
-                        <span class="text-desc">[[${blog.viewCount}]]个浏览</span>
-                        <span class="text-desc">[[${blog.likeCount}]]个喜欢</span>
-                        <span class="text-desc">创建时间：[[${#dates.format(blog.createTime,'yyyy年MM月dd日')}]]</span>
-                    </div>
+            <form th:action="@{/publish}" action="#" method="post">
+                <div class="form-group">
+                    <label for="title">标题</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="请输入标题">
                 </div>
                 <br/>
-            </div>
+                <br/>
+                <label for="value">正文</label>
+                <textarea id="value" name="value" class="form-control" rows="10" placeholder="请输入正文"></textarea>
+                <br/>
+                <br/>
+                <div class="form-group">
+                    <label for="tag">标签</label>
+                    <input type="text" class="form-control" id="tag" name="tag" placeholder="请添加标签">
+                </div>
+                <br/>
+                <br/>
+                <div class="form-group">
+                    <label for="firstImg">首图地址</label>
+                    <input type="text" class="form-control" id="firstImg" name="firstImg" placeholder="请添加首图地址">
+                </div>
+                <br/>
+                <br/>
+                <button type="submit" class="btn btn-primary right">发布</button>
+            </form>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h2>热门话题</h2>
+            <h2>发布博客</h2>
+            标题一定要写，简明扼要！！
+            多个标签以逗号分隔！！
+            博客内容清晰明了！!
         </div>
     </div>
 </div>
