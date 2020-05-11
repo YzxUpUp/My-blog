@@ -19,31 +19,32 @@
             <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 发布</h2>
 
             <hr>
-            <form th:action="@{/admin/publish}" action="#" method="post">
+            <form th:action="@{/admin/edit}" action="#" method="post">
+                <input type="hidden" name="id" th:value="${blog.id}">
                 <div class="form-group">
                     <label for="title">标题</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="请输入标题">
+                    <input th:value="${blog.title}" type="text" class="form-control" id="title" name="title" placeholder="请输入标题">
                 </div>
                 <br/>
                 <br/>
                 <label for="value">正文</label>
-                <textarea id="value" name="value" class="form-control" rows="10" placeholder="请输入正文"></textarea>
+                <textarea th:value="${blog.value}" id="value" name="value" class="form-control" rows="10" placeholder="请输入正文"></textarea>
                 <br/>
                 <br/>
                 <div class="form-group">
                     <label for="tag">标签</label>
-                    <input type="text" class="form-control" id="tag" name="tag" placeholder="请添加标签">
+                    <input th:value="${blog.tag}" type="text" class="form-control" id="tag" name="tag" placeholder="请添加标签">
                 </div>
                 <br/>
                 <br/>
                 <div class="form-group">
                     <label for="firstImg">首图地址</label>
-                    <input type="text" class="form-control" id="firstImg" name="firstImg" placeholder="请添加首图地址">
+                    <input th:value="${blog.firstImg}" type="text" class="form-control" id="firstImg" name="firstImg" placeholder="请添加首图地址">
                 </div>
                 <br/>
                 <br/>
-                <a th:href="@{/}" href="#" class="btn btn-info right" style="margin-left: 10px">返回</a>
-                <button type="submit" class="btn btn-primary right">发布</button>
+                <a th:href="@{/admin/mange}" href="#" class="btn btn-info right" style="margin-left: 10px">返回</a>
+                <button type="submit" class="btn btn-primary right">修改</button>
             </form>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">

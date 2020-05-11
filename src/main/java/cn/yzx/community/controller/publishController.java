@@ -11,21 +11,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/publish")
+@RequestMapping("/admin")
 public class publishController {
 
     @Autowired
     private blogMapper mapper;
 
-    @GetMapping
+    @GetMapping("/publish")
     public String publish() {
         return "publish";
     }
 
-    @PostMapping
+    @PostMapping("/publish")
     public String addBlog(@RequestParam(defaultValue = "暂无标题") String title,
-                          @RequestParam String value,
-                          @RequestParam String tag,
+                          @RequestParam(defaultValue = "暂无内容") String value,
+                          @RequestParam(defaultValue = "暂无标签") String tag,
                           @RequestParam(defaultValue = "https://unsplash.it/800/600?image=1050") String firstImg) {
         blog b = new blog();
         b.setTitle(title);

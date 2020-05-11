@@ -15,4 +15,16 @@
         select * from blog limit #{start} , #{rows};
     </select>
 
+    <update id="updateBlog" parameterType="blog">
+        update blog set title=#{title},value=#{value},tag=#{tag},first_img=#{firstImg} where id=#{id};
+    </update>
+
+    <delete id="deleteBlog">
+        delete from blog where id = #{id};
+    </delete>
+
+    <select id="getBlog" resultType="blog">
+        select * from blog where id = #{id};
+    </select>
+
 </mapper>
