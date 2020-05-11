@@ -47,8 +47,11 @@
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
             <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 博客列表</h2>
+            <span aria-hidden="true" style="color: red">共</span>
+            <span aria-hidden="true">[[${page.totalCount}]]</span>
+            <span aria-hidden="true" style="color: red">篇博客</span>
             <hr>
-            <div class="media" th:each="blog:${blogs}">
+            <div class="media" th:each="blog:${page.counts}">
                 <div class="media-left media-middle">
                     <a href="#">
                         <img class="media-object img-rounded" th:src="${blog.firstImg}" src="../static/images/head.png" style="width: 300px;height: 150px">
@@ -71,6 +74,23 @@
             <h2>热门话题</h2>
         </div>
     </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li>
+                <a th:if="${page.firstPage} == false" th:href="@{/(currentPage=${page.currentPage}-1)}" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li th:classappend="${i.intValue() == page.currentPage}?'active'" th:each="i:${#numbers.sequence(1,page.totalPage)}">
+                <a href="#" th:href="@{/(currentPage=${i.intValue()})}" th:text="${i.intValue()}"></a>
+            </li>
+            <li>
+                <a th:if="${page.lastpage} == false" th:href="@{/(currentPage=${page.currentPage}+1)}" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
 </body>
 </html>
