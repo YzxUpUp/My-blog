@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/me.css}" href="../static/css/me.css">
     <script th:src="@{/js/jquery-3.4.1.min.js}" src="../static/js/jquery-3.4.1.min.js"></script>
     <script th:src="@{/js/bootstrap.min.js}" type="application/javascript" src="../static/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/me.js}" src="../static/js/me.js"></script>
 </head>
 <body style="background-color: #efefef">
 <!--导航栏-->
@@ -24,13 +25,47 @@
                 </small>
             </h2>
             <p class="text-left" th:text="${blog.value}">...</p>
-            <a th:href="@{/}" href="#" class="btn btn-info right" style="margin-left: 10px">返回</a>
+            <p class="text-left" th:text="${blog.value}">...</p>
+            <form th:action="@{/comment}" action="#" method="post">
+                <input name="parentId" th:value="${blog.id}" type="hidden">
+                <label for="commentValue">评论</label>
+                <input type="text" id="commentValue" name="commentValue" class="form-control" rows="10"
+                       placeholder="请输入评论">
+                <br/>
+                <div style="float: left;margin-right: 20px">
+                    <label for="commenterName">昵称</label>
+                    <input style="width: 300px" type="text" class="form-control" id="commenterName" name="commenterName"
+                           placeholder="我希望通过昵称记住您">
+                </div>
+                <div style="float: left">
+                    <label for="commenterEmail">邮箱</label>
+                    <input style="width: 300px" type="email" class="form-control" id="commenterEmail"
+                           name="commenterEmail" placeholder="我将通过邮箱告知,我回复了您">
+                </div>
+                <button type="submit" class="btn btn-success right" style="margin-top: 15px">发布</button>
+            </form>
+            <a th:href="@{/}" href="#" class="btn btn-info right" style="margin-top: 15px;margin-right: 15px">返回</a>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h2>标签</h2>
-            <div th:text="${blog.tag}"></div>
+            <h2>评论</h2>
+            <div th:each="comment,i:${comments}">
+                <div th:id="value+${i.count}" id="value" style="overflow:hidden" class="hiddenText"
+                     th:text="${comment.commentValue}"></div>
+                <small>
+                    <a th:id="${i.count}" onclick="show(this)" href="#" id="detail">详情</a>
+                    <span class="text-desc">[[${comment.commenterName}]]</span>
+                    <span class="text-desc">[[${comment.commenterEmail}]]</span>
+                </small>
+            </div>
         </div>
     </div>
 </div>
+<script>
+    function show(obj) {
+        var id = obj.id;
+        var innerText = document.getElementById("value" + id).innerText;
+        alert(innerText);
+    }
+</script>
 </body>
 </html>

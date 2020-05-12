@@ -12,3 +12,9 @@
     font-weight: normal;
     color: #999;
 }
+
+.hiddenText{
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    word-break: normal !important;
+}

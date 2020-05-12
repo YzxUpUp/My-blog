@@ -29,6 +29,11 @@
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading" th:text="${blog.title}">Mybatis快速入门</h4>
+                    <div th:text="${blog.value}" style="overflow:hidden;width: 400px"  class="hiddenText"></div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
                     <a th:href="@{/value(id = ${blog.id})}" href="#">点击进入博客</a>
                     <div>
                         <span class="text-desc">[[${blog.commentCount}]]个回复</span>

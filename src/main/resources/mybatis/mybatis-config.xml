@@ -9,5 +9,6 @@
     <typeAliases>
         <typeAlias type="cn.yzx.community.pojo.user" alias="user"/>
         <typeAlias type="cn.yzx.community.pojo.blog" alias="blog"/>
+        <typeAlias type="cn.yzx.community.pojo.comment" alias="comment"/>
     </typeAliases>
 </configuration>

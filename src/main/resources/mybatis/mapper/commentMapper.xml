@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.yzx.community.mapper.commentMapper" >
+
+    <insert id="addComment" parameterType="comment">
+        insert into comment(parent_id,type,commenter_name,commenter_email,comment_value)
+        values(#{parentId},#{type},#{commenterName},#{commenterEmail},#{commentValue});
+    </insert>
+
+    <select id="getComment" resultType="comment">
+        select * from comment where parent_id = #{parentId};
+    </select>
+
+</mapper>
