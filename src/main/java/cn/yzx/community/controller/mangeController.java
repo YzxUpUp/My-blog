@@ -4,6 +4,7 @@ import cn.yzx.community.mapper.blogMapper;
 import cn.yzx.community.pojo.blog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +20,9 @@ public class mangeController {
     private blogMapper mapper;
 
     @GetMapping("/mange")
-    public String mange(HttpServletRequest request) {
+    public String mange(Model model) {
         List<blog> allBolg = mapper.getAllBolg();
-        request.setAttribute("allBlog", allBolg);
+        model.addAttribute("allBlog", allBolg);
         return "mange";
     }
 
@@ -33,9 +34,9 @@ public class mangeController {
 
     @GetMapping("/edit")
     public String edit(@RequestParam int id,
-                       HttpServletRequest request) {
+                       Model model) {
         blog blog = mapper.getBlog(id);
-        request.setAttribute("blog",blog);
+        model.addAttribute("blog",blog);
         return "edit";
     }
 

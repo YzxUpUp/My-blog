@@ -23,17 +23,16 @@
             <hr>
             <div class="media" th:each="blog:${page.counts}">
                 <div class="media-left media-middle">
-                    <a href="#">
+                    <a th:href="@{/value(id = ${blog.id})}" href="#">
                         <img class="media-object img-rounded" th:src="${blog.firstImg}" src="../static/images/head.png" style="width: 300px;height: 150px">
                     </a>
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading" th:text="${blog.title}">Mybatis快速入门</h4>
-                    <a href="#">点击进入博客</a>
+                    <a th:href="@{/value(id = ${blog.id})}" href="#">点击进入博客</a>
                     <div>
                         <span class="text-desc">[[${blog.commentCount}]]个回复</span>
                         <span class="text-desc">[[${blog.viewCount}]]个浏览</span>
-                        <span class="text-desc">[[${blog.likeCount}]]个喜欢</span>
                         <span class="text-desc">创建时间：[[${#dates.format(blog.createTime,'yyyy年MM月dd日')}]]</span>
                     </div>
                 </div>

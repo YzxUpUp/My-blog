@@ -21,4 +21,6 @@ public interface blogMapper {
     void deleteBlog(@Param("id") int id);
 
     blog getBlog(@Param("id") int id);
+
+    void addView(blog b);
 }

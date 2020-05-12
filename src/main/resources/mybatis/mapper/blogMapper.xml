@@ -27,4 +27,8 @@
         select * from blog where id = #{id};
     </select>
 
+    <update id="addView" parameterType="blog">
+        update blog set view_count = #{viewCount}+1 where id = #{id};
+    </update>
+
 </mapper>
