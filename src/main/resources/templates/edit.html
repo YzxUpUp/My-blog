@@ -6,8 +6,13 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}" href="../static/css/bootstrap-theme.min.css">
     <link rel="stylesheet" th:href="@{/css/me.css}" href="../static/css/me.css">
+    <link rel="stylesheet" th:href="@{/css/editormd.min.css}" href="../static/css/editormd.min.css">
+    <link rel="stylesheet" th:href="@{/css/editormd.preview.min.css}" href="../static/css/editormd.preview.min.css">
     <script th:src="@{/js/jquery-3.4.1.min.js}" src="../static/js/jquery-3.4.1.min.js"></script>
-    <script th:src="@{/js/bootstrap.min.js}" type="application/javascript" src="../static/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/editormd.min.js}" src="../static/js/editormd.min.js" type="application/javascript"></script>
+    <script th:src="@{/js/lib/marked.min.js}" src="../static/js/lib/marked.min.js"></script>
+    <script th:src="@{/js/lib/prettify.min.js}" src="../static/js/lib/prettify.min.js"></script>
 </head>
 <body style="background-color: #efefef">
 <!--导航栏-->
@@ -15,7 +20,7 @@
 <!--主体-->
 <div class="container-fluid main" style="background-color: white">
     <div class="row">
-        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <h2><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 发布</h2>
 
             <hr>
@@ -27,8 +32,24 @@
                 </div>
                 <br/>
                 <br/>
-                <label for="value">正文</label>
-                <textarea th:value="${blog.value}" id="value" name="value" class="form-control" rows="10" placeholder="请输入正文"></textarea>
+                <div class="form-group" id="blog-editor">
+                    <textarea id="value" name="value" class="form-control" rows="10" style="display:none;"></textarea>
+                </div>
+                <script>
+                    $(function () {
+                        var editor = editormd("blog-editor", {
+                            width: "100%",
+                            height: "400px",
+                            path: "/js/lib/",
+                            delay: 0,
+                            watch: false,
+                            placeholder: "请输入博客内容",
+                            imageUpload: true,
+                            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                            imageUploadURL: "/file/upload",
+                        });
+                    });
+                </script>
                 <br/>
                 <br/>
                 <div class="form-group">
@@ -46,12 +67,6 @@
                 <a th:href="@{/admin/mange}" href="#" class="btn btn-info right" style="margin-left: 10px">返回</a>
                 <button type="submit" class="btn btn-primary right">修改</button>
             </form>
-        </div>
-        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h2>发布博客</h2>
-            标题一定要写，简明扼要！！
-            多个标签以逗号分隔！！
-            博客内容清晰明了！!
         </div>
     </div>
 </div>

@@ -1,13 +1,18 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title>YzxUPUP</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}" href="../static/css/bootstrap-theme.min.css">
     <link rel="stylesheet" th:href="@{/css/me.css}" href="../static/css/me.css">
+    <link rel="stylesheet" th:href="@{/css/editormd.min.css}" href="../static/css/editormd.min.css">
+    <link rel="stylesheet" th:href="@{/css/editormd.preview.min.css}" href="../static/css/editormd.preview.min.css">
     <script th:src="@{/js/jquery-3.4.1.min.js}" src="../static/js/jquery-3.4.1.min.js"></script>
-    <script th:src="@{/js/bootstrap.min.js}" type="application/javascript" src="../static/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/editormd.min.js}" src="../static/js/editormd.min.js" type="application/javascript"></script>
+    <script th:src="@{/js/lib/marked.min.js}" src="../static/js/lib/marked.min.js"></script>
+    <script th:src="@{/js/lib/prettify.min.js}" src="../static/js/lib/prettify.min.js"></script>
     <script th:src="@{/js/me.js}" src="../static/js/me.js"></script>
 </head>
 <body style="background-color: #efefef">
@@ -24,8 +29,20 @@
                     <span class="text-desc">创建时间：[[${#dates.format(blog.createTime,'yyyy年MM月dd日')}]]</span>
                 </small>
             </h2>
-            <p class="text-left" th:text="${blog.value}">...</p>
-            <p class="text-left" th:text="${blog.value}">...</p>
+            <!--博客内容-->
+            <div id="value-view">
+                <textarea th:text="${blog.value}" style="display:none;">### Hello world!</textarea>
+            </div>
+            <script>
+                $(function() {
+                    var testView = editormd.markdownToHTML("value-view", {
+                        // markdown : "[TOC]\n### Hello world!\n## Heading 2", // Also, you can dynamic set Markdown text
+                        // htmlDecode : true,  // Enable / disable HTML tag encode.
+                        // htmlDecode : "style,script,iframe",  // Note: If enabled, you should filter some dangerous HTML tags for website security.
+                    });
+                });
+            </script>
+            <!--            <p class="text-left" th:text="${blog.value}">...</p>-->
             <form th:action="@{/comment}" action="#" method="post">
                 <input name="parentId" th:value="${blog.id}" type="hidden">
                 <label for="commentValue">评论</label>
