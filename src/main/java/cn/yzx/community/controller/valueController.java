@@ -27,6 +27,9 @@ public class valueController {
                             Model model,
                             HttpSession session){
         blog blog = mapper.getBlog(id);
+        int commentCount = mapper.getCommentCount(id);
+        mapper.addCommentCount(commentCount,id);
+        blog.setCommentCount(commentCount);
         List<comment> comments = cmapper.getComment((long) id);
         Object viewMark = session.getAttribute("viewMark");
         if(viewMark == null){

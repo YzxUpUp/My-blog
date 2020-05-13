@@ -31,4 +31,20 @@
         update blog set view_count = #{viewCount}+1 where id = #{id};
     </update>
 
+    <select id="getBlogByLike" resultType="blog">
+        select * from blog where title like "%"#{bloginfo}"%";
+    </select>
+
+    <select id="getBlogByMostView" resultType="blog">
+        select * from blog order by view_count desc limit 0 , 7;
+    </select>
+
+    <select id="getCommentCount" resultType="int">
+        select count(*) from blog b,comment c where b.id = c.parent_id and b.id = #{id};
+    </select>
+
+    <update id="addCommentCount">
+        update blog set comment_count = #{num} where id = #{id};
+    </update>
+
 </mapper>

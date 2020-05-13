@@ -21,6 +21,7 @@
             <span aria-hidden="true">[[${page.totalCount}]]</span>
             <span aria-hidden="true" style="color: red">篇博客</span>
             <hr>
+            <span class="warning" th:text="${non}"></span>
             <div class="media" th:each="blog:${page.counts}">
                 <div class="media-left media-middle">
                     <a th:href="@{/value(id = ${blog.id})}" href="#">
@@ -45,7 +46,15 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h2>热门博客</h2>
+            <h2>如果你想联系我</h2>
+            <br/>
+            <img th:src="@{/images/wechat.png}" src="../static/images/wechat.png" height="100" width="100"/>
+            <h2>浏览量较高的博客</h2>
+            <div th:each="view:${mostView}">
+                <a th:href="@{/value(id = ${view.id})}" href="#" th:text="${view.title}"></a>
+                <span class="text-desc">[[${view.viewCount}]]个浏览</span>
+            </div>
+            <br/>
         </div>
     </div>
     <nav aria-label="Page navigation">

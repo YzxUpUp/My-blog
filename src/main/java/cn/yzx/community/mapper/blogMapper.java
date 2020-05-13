@@ -23,4 +23,13 @@ public interface blogMapper {
     blog getBlog(@Param("id") int id);
 
     void addView(blog b);
+
+    List<blog> getBlogByLike(@Param("bloginfo") String bloginfo);
+
+    List<blog> getBlogByMostView();
+
+    int getCommentCount(@Param("id") int id);
+
+    void addCommentCount(@Param("num") int num,
+                         @Param("id") int id);
 }
