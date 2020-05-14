@@ -21,4 +21,11 @@ public class commentController {
         mapper.addComment(comm);
         return "redirect:/value?id="+comm.getParentId();
     }
+
+    @GetMapping("/delComm")
+    public String delComm(@RequestParam String type,
+                          @RequestParam int id){
+        mapper.delComm(type);
+        return "redirect:/value?id="+id;
+    }
 }

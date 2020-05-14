@@ -33,7 +33,7 @@
                 <br/>
                 <br/>
                 <div class="form-group" id="blog-editor">
-                    <textarea id="value" name="value" class="form-control" rows="10" style="display:none;"></textarea>
+                    <textarea th:text="${blog.value}" id="value" name="value" class="form-control" rows="10" style="display:none;"></textarea>
                 </div>
                 <script>
                     $(function () {

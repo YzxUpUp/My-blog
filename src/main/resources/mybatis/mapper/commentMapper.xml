@@ -11,4 +11,8 @@
         select * from comment where parent_id = #{parentId};
     </select>
 
+    <delete id="delComm">
+        delete from comment where type = #{type};
+    </delete>
+
 </mapper>

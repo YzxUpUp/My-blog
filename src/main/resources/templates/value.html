@@ -72,6 +72,7 @@
                     <a th:id="${i.count}" onclick="show(this)" href="#" id="detail">详情</a>
                     <span class="text-desc">[[${comment.commenterName}]]</span>
                     <span class="text-desc">[[${comment.commenterEmail}]]</span>
+                    <a th:if="${session.user} != null" th:href="@{/delComm(type=${comment.type},id=${comment.parentId})}" href="#">删除</a>
                 </small>
             </div>
         </div>

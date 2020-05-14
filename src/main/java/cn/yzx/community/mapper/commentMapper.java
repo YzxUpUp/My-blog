@@ -12,5 +12,5 @@ public interface commentMapper {
 
     List<comment> getComment(@Param("parentId") Long parentId);
 
-    List<comment> getCommentByType(@Param("type") String type);
+    void delComm(@Param("type")String type);
 }
