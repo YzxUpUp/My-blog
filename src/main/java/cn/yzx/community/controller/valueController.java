@@ -34,7 +34,12 @@ public class valueController {
         Object viewMark = session.getAttribute("viewMark");
         if(viewMark == null){
             mapper.addView(blog);
-            session.setAttribute("viewMark","1");
+            session.setAttribute("viewMark",id);
+        }else{
+            if((int)viewMark != id){
+                mapper.addView(blog);
+                session.setAttribute("viewMark",id);
+            }
         }
         model.addAttribute("comments",comments);
         model.addAttribute("blog",blog);
