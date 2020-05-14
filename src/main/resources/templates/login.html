@@ -7,6 +7,7 @@
     <link rel="stylesheet" th:href="@{/css/me.css}" href="../static/css/me.css">
     <script th:src="@{/js/jquery-3.4.1.min.js}" src="../static/js/jquery-3.4.1.min.js"></script>
     <script th:src="@{/js/bootstrap.min.js}" type="application/javascript" src="../static/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/bootstrapValidator.min.js}" src="../static/js/bootstrapValidator.min.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default" th:fragment="top">
@@ -24,7 +25,7 @@
         <div class="modal-header">
             <h4 class="modal-title text-center" id="myModalLabel">登录</h4>
         </div>
-        <form th:action="@{/login}" action="#" method="post">
+        <form id="upload" th:action="@{/login}" action="#" method="post">
             <div class="modal-body" id="model-body">
                 <div class="form-group">
                     <input type="text" name="username" class="form-control" placeholder="用户名" autocomplete="off">
@@ -42,5 +43,34 @@
     </div>
 </div>
 <div th:if="${error} != null" style="color: red;text-align: center;font-size: 30px" th:text="${error}"></div>
+<script>
+    $(function () {
+        $('form').bootstrapValidator({
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                username: {
+                    message: '用户名验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: '用户名不能为空'
+                        }
+                    }
+                },
+                password: {
+                    validators: {
+                        notEmpty: {
+                            message: '密码不能为空'
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>

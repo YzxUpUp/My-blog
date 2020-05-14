@@ -14,6 +14,7 @@
     <script th:src="@{/js/lib/marked.min.js}" src="../static/js/lib/marked.min.js"></script>
     <script th:src="@{/js/lib/prettify.min.js}" src="../static/js/lib/prettify.min.js"></script>
     <script th:src="@{/js/me.js}" src="../static/js/me.js"></script>
+    <script th:src="@{/js/bootstrapValidator.min.js}" src="../static/js/bootstrapValidator.min.js"></script>
 </head>
 <body style="background-color: #efefef">
 <!--导航栏-->
@@ -84,6 +85,37 @@
         var innerText = document.getElementById("value" + id).innerText;
         alert(innerText);
     }
+</script>
+<script>
+    $(function () {
+        $('form').bootstrapValidator({
+            message: 'This value is not valid',
+            fields: {
+                commentValue: {
+                    message: '内容验证失败',
+                    validators: {
+                        notEmpty: {
+                            message: ' '
+                        }
+                    }
+                },
+                commenterName: {
+                    validators: {
+                        notEmpty: {
+                            message: ' '
+                        }
+                    }
+                },
+                commenterEmail: {
+                    validators: {
+                        notEmpty: {
+                            message: ' '
+                        }
+                    }
+                }
+            }
+        });
+    });
 </script>
 </body>
 </html>
