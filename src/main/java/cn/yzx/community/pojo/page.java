@@ -12,4 +12,5 @@ public class page {
     private List<blog> counts; //每个分页所含数据量
     private boolean firstPage; //是否为第一页
     private boolean lastpage; //是否为最后一页
+    private List<String> allTag;
 }

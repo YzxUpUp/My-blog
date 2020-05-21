@@ -3,6 +3,7 @@ package cn.yzx.community.pojo;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class blog {
@@ -16,4 +17,5 @@ public class blog {
     private int viewCount;
     private int likeCount;
     private String tag;
+    private String[] tags;
 }

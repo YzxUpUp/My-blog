@@ -24,7 +24,9 @@ public interface blogMapper {
 
     void addView(blog b);
 
-    List<blog> getBlogByLike(@Param("bloginfo") String bloginfo);
+    List<blog> getBlogByLike(@Param("bloginfo") String bloginfo,
+                             @Param("start") int start,
+                             @Param("rows") int rows);
 
     List<blog> getBlogByMostView();
 
@@ -32,4 +34,12 @@ public interface blogMapper {
 
     void addCommentCount(@Param("num") int num,
                          @Param("id") int id);
+
+    List<String> getAllTag();
+
+    String getTag(@Param("id") int id);
+
+    List<blog> getBlogByTag(@Param("tag") String tag,
+                            @Param("start") int start,
+                            @Param("rows") int rows);
 }

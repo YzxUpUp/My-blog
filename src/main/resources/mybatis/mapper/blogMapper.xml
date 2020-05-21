@@ -8,11 +8,11 @@
     </insert>
 
     <select id="getAllBolg" resultType="blog">
-        select * from blog;
+        select * from blog order by create_time desc;
     </select>
 
     <select id="getByPage" resultType="blog">
-        select * from blog limit #{start} , #{rows};
+        select * from blog order by create_time desc limit #{start} , #{rows};
     </select>
 
     <update id="updateBlog" parameterType="blog">
@@ -32,7 +32,7 @@
     </update>
 
     <select id="getBlogByLike" resultType="blog">
-        select * from blog where title like "%"#{bloginfo}"%";
+        select * from blog where title like "%"#{bloginfo}"%" order by create_time desc limit #{start} , #{rows};
     </select>
 
     <select id="getBlogByMostView" resultType="blog">
@@ -46,5 +46,17 @@
     <update id="addCommentCount">
         update blog set comment_count = #{num} where id = #{id};
     </update>
+
+    <select id="getAllTag" resultType="string">
+        select tag from blog;
+    </select>
+
+    <select id="getTag" resultType="string">
+        select tag from blog where id = #{id};
+    </select>
+
+    <select id="getBlogByTag" resultType="blog">
+        select * from blog where tag like "%"#{tag}"%" order by create_time desc limit #{start} , #{rows};
+    </select>
 
 </mapper>
