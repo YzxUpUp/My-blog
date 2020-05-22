@@ -14,7 +14,7 @@
 <!--导航栏-->
 <nav th:replace="fragment :: top"></nav>
 <!--主体-->
-<div class="container-fluid main" style="background-color: white">
+<div class="container-fluid" style="background-color: white">
     <div class="row">
         <div class="col-lg-9 col-xs-12">
             <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span> 博客列表</h2>
@@ -48,6 +48,19 @@
             </div>
         </div>
         <div class="col-lg-3 col-xs-12">
+            <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 个人简介</h2>
+            <div>
+                一只即将面对秋招，为了能拿到不错的offer，努力学习的蜗牛🐌
+                <br/>
+                喜欢周杰伦，喜欢敲代码，喜欢听歌……
+                <br/>
+                <br/>
+                我要一步一步往上爬，等待阳光静静看着它的脸
+                <br/>
+                                    -- 周杰伦《蜗牛》
+            </div>
+            <br/>
+
             <h2><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> 所有标签</h2>
             <span th:each="tags:${page.allTag}"><a th:href="@{/searchByTag(tag=${tags})}" class="label label-info">[[${tags}]]</a> </span>
             <br/>
@@ -59,9 +72,17 @@
             </div>
             <br/>
 
-            <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 如果你想联系我</h2>
-            <img th:src="@{/images/QQ.png}" src="../static/images/wechat.png" height="100" width="100"/>
-            <img th:src="@{/images/wechat.png}" src="../static/images/QQ.png" height="100" width="100" style="margin-left: 50px" />
+            <h2><span class="glyphicon glyphicon-flag" aria-hidden="true"></span> 其他主页</h2>
+            <a href="https://www.jianshu.com/u/c6a427a41c56" class="label label-info" style="background-color: #00d95a;font-size: 20px">简书</a>
+            <br/>
+            <br/>
+            <a href="https://github.com/YzxUpUp" class="label label-info" style="background-color: black;font-size: 20px">GitHub</a>
+
+            <br/>
+
+            <h2><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> 如果你想联系我</h2>
+            <img th:src="@{/images/QQ.png}" src="../static/images/wechat.png" height="100" width="100" style="margin-left: 10px"/>
+            <img th:src="@{/images/wechat.png}" src="../static/images/QQ.png" height="100" width="100" style="margin-left: 20px;margin-right: 10px" />
         </div>
     </div>
     <nav aria-label="Page navigation">
@@ -81,6 +102,11 @@
             </li>
         </ul>
     </nav>
+</div>
+<div style="text-align: center;margin-top: 20px;margin-bottom: 20px">
+    <a class="text-desc" href="http://www.beian.miit.gov.cn/" target="_blank">浙ICP备20017599号-1</a>
+    <br/>
+    <span class="text-desc">I hope everyone is happy every day</span>
 </div>
 </body>
 </html>

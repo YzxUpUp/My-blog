@@ -21,7 +21,7 @@
 <!--导航栏-->
 <nav th:replace="fragment :: top"></nav>
 <!--主体-->
-<div class="container-fluid main" style="background-color: white">
+<div class="container-fluid" style="background-color: white">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
             <h2>[[${blog.title}]]
@@ -86,7 +86,7 @@
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <h2>标签</h2>
-            <span th:each="tag:${blog.tags}"><a th:href="@{/searchByTag(tag=${tags})}" class="label label-success">[[${tag}]]</a> </span>
+            <span th:each="tag:${blog.tags}"><span style="background-color: red" class="badge">[[${tag}]]</span> </span>
             <h2>评论</h2>
             <a class="btn btn-info" role="button" data-toggle="collapse" href="#listComment" aria-expanded="false"
                aria-controls="listComment" style="margin-bottom: 10px">
@@ -149,5 +149,10 @@
         });
     });
 </script>
+<div style="text-align: center;margin-top: 20px;margin-bottom: 20px">
+    <a class="text-desc" href="http://www.beian.miit.gov.cn/" target="_blank">浙ICP备20017599号-1</a>
+    <br/>
+    <span class="text-desc">I hope everyone is happy every day</span>
+</div>
 </body>
 </html>
