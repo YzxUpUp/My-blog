@@ -110,3 +110,8 @@
         opacity: 0;
     }
 }
+
+.pc {
+    float: left;
+    width: 50%;
+}

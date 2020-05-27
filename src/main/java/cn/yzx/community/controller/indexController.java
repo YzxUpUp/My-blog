@@ -4,12 +4,14 @@ import cn.yzx.community.mapper.blogMapper;
 import cn.yzx.community.pojo.blog;
 import cn.yzx.community.pojo.page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,7 +27,8 @@ public class indexController {
     public String search(@RequestParam(defaultValue = "1") int currentPage,
                          @RequestParam(defaultValue = "100") int rows,
                          Model model,
-                         String bloginfo){
+                         String bloginfo,
+                         HttpServletRequest request){
         page p = new page();
         p.setCurrentPage(currentPage); //装载当前页数
 
@@ -74,6 +77,11 @@ public class indexController {
 
         p.setCounts(blogByLike); //装载本页数据
 
+        String ua = request.getHeader("user-agent"); //通过ua判断是否为手机终端
+        if(ua.contains("Android") || ua.contains("iPhone") || ua.contains("iPod") || ua.contains("ios")) {
+            model.addAttribute("isPhone", 1);
+        }
+
         model.addAttribute("page",p);
         model.addAttribute("mostView",blogByMostView);
 
@@ -83,7 +91,8 @@ public class indexController {
     @GetMapping("/")
     public String index(Model model,
                         @RequestParam(defaultValue = "1") int currentPage,
-                        @RequestParam(defaultValue = "4") int rows){
+                        @RequestParam(defaultValue = "10") int rows,
+                        HttpServletRequest request){
         page p = new page();
         p.setCurrentPage(currentPage); //装载当前页数
 
@@ -128,10 +137,13 @@ public class indexController {
             blog.setTags(tags);
         }
 
+        String ua = request.getHeader("user-agent"); //通过ua判断是否为手机终端
+        if(ua.contains("Android") || ua.contains("iPhone") || ua.contains("iPod") || ua.contains("ios")) {
+            model.addAttribute("isPhone", 1);
+        }
+
         model.addAttribute("page",p);
         model.addAttribute("mostView",blogByMostView);
-
-
 
         return "index";
     }
@@ -140,7 +152,8 @@ public class indexController {
     public String index(Model model,
                         @RequestParam(defaultValue = "1") int currentPage,
                         @RequestParam(defaultValue = "100") int rows,
-                        @RequestParam String tag){
+                        @RequestParam String tag,
+                        HttpServletRequest request){
         page p = new page();
         p.setCurrentPage(currentPage); //装载当前页数
 
@@ -184,6 +197,11 @@ public class indexController {
             String[] tags = blog.getTag().split(",");
 //            System.out.println(Arrays.toString(tags));
             blog.setTags(tags);
+        }
+
+        String ua = request.getHeader("user-agent"); //通过ua判断是否为手机终端
+        if(ua.contains("Android") || ua.contains("iPhone") || ua.contains("iPod") || ua.contains("ios")) {
+            model.addAttribute("isPhone", 1);
         }
 
         model.addAttribute("page",p);

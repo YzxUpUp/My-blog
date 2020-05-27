@@ -7,8 +7,19 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" th:href="@{/css/bootstrap-theme.min.css}" href="../static/css/bootstrap-theme.min.css">
     <link rel="stylesheet" th:href="@{/css/me.css}" href="../static/css/me.css">
+    <link th:href="@{/css/style.css(v=2)}" href="../static/css/style.css?v=2" rel="stylesheet" type="text/css"
+          media="all">
+    <link th:href="@{/css/animate.min.css}" rel="stylesheet" href="../static/css/animate.min.css">
     <script th:src="@{/js/jquery-3.4.1.min.js}" src="../static/js/jquery-3.4.1.min.js"></script>
     <script th:src="@{/js/bootstrap.min.js}" type="application/javascript" src="../static/js/bootstrap.min.js"></script>
+    <script th:src="@{/js/stickySidebar.js}" src="../static/js/stickySidebar.js"></script>
+    <script th:src="@{/js/wow.min.js}" src="../static/js/wow.min.js"></script>
+    <script>
+        if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
+            new WOW().init();
+        }
+        ;
+    </script>
 </head>
 <body style="background-color: #efefef">
 <!--导航栏-->
@@ -23,18 +34,18 @@
             <span aria-hidden="true" style="color: red">篇博客</span>
             <hr>
             <span class="warning" th:text="${non}"></span>
-            <div class="media" th:each="blog:${page.counts}">
+            <div class="media" th:classappend="${isPhone != 1} ? 'pc'" th:each="blog:${page.counts}">
                 <div class="media-left media-middle">
                     <a th:href="@{/value(id = ${blog.id})}" href="#">
-                        <img class="media-object img-rounded" th:src="${blog.firstImg}" src="../static/images/head.png" style="width: 200px;height: 150px">
+                        <img class="media-object img-rounded" th:src="${blog.firstImg}" src="../static/images/head.png"
+                             style="width: 200px;height: 150px">
                     </a>
                 </div>
                 <div class="media-body">
-                    <h2 class="media-heading" th:text="${blog.title}">Mybatis快速入门</h2>
+                    <h3 class="media-heading" th:text="${blog.title}">Mybatis快速入门</h3>
                     <div>
-<!--                        <span style="background-color: orange" class="badge">[[${blog.tag}]]</span>-->
-<!--                        <a th:href="@{/searchByTag(tag=${tag})}" th:each="tag:${blog.tags}" style="background-color: darkseagreen" class="badge">[[${tag}]]</a>-->
-                        <span th:each="tag:${blog.tags}"><span style="background-color: red" class="badge">[[${tag}]]</span> </span>
+                        <span th:each="tag:${blog.tags}"><span style="background-color: red"
+                                                               class="badge">[[${tag}]]</span> </span>
                         <br/>
                         <span style="background-color: orange" class="badge">评论数:[[${blog.commentCount}]]</span>
                         <br/>
@@ -47,56 +58,80 @@
                 <br/>
             </div>
         </div>
-        <div class="col-lg-3 col-xs-12">
-            <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 个人简介</h2>
-            <div>
-                一只即将面对秋招，为了能拿到不错的offer，努力学习的蜗牛🐌
-                <br/>
-                喜欢周杰伦，喜欢敲代码，喜欢听歌……
-                <br/>
-                <br/>
-                我要一步一步往上爬，等待阳光静静看着它的脸
-                <br/>
-                                    -- 周杰伦《蜗牛》
+        <div class="visible-lg-3 hidden-xs right-fun container-content">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <div class="model">
+                <div class="glyphicon glyphicon-user title"> 个人简介</div>
+                <div class="content">
+                    <br/>
+                    一只即将面对秋招，为了能拿到不错的offer，努力学习的蜗牛🐌
+                    <br/>
+                    喜欢周杰伦，喜欢敲代码，喜欢听歌……
+                    <br/>
+                    <br/>
+                    我要一步一步往上爬，等待阳光静静看着它的脸
+                    <br/>
+                    -- 周杰伦《蜗牛》
+                </div>
             </div>
-            <br/>
-
-            <h2><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> 所有标签</h2>
-            <span th:each="tags:${page.allTag}"><a th:href="@{/searchByTag(tag=${tags})}" class="label label-info">[[${tags}]]</a> </span>
-            <br/>
-
-            <h2><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span> 浏览量较高的博客</h2>
-            <div th:each="view:${mostView}">
-                <a th:href="@{/value(id = ${view.id})}" href="#" class="label label-default" th:text="${view.title}"></a>
-                <span class="text-desc">[[${view.viewCount}]]个浏览</span>
+            <div class="model">
+                <div class="glyphicon glyphicon-phone title"> 如果你想联系我</div>
+                <div class="content">
+                    <br/>
+                    <img th:src="@{/images/QQ.png}" src="../static/images/wechat.png" height="100" width="100"/>
+                    <img th:src="@{/images/wechat.png}" src="../static/images/QQ.png" height="100" width="100"
+                         style="margin-left: 20px;margin-right: 10px"/>
+                </div>
             </div>
-            <br/>
+            <div class="model recommend">
+                <div class="glyphicon glyphicon-tags title"> 所有标签</div>
+                <div class="content">
+                    <br/>
+                    <span th:each="tags:${page.allTag}"><a th:href="@{/searchByTag(tag=${tags})}" class="label label-info">[[${tags}]]</a> </span>
+                </div>
 
-            <h2><span class="glyphicon glyphicon-flag" aria-hidden="true"></span> 其他主页</h2>
-            <a href="https://www.jianshu.com/u/c6a427a41c56" class="label label-info" style="background-color: #00d95a;font-size: 20px">简书</a>
-            <br/>
-            <br/>
-            <a href="https://github.com/YzxUpUp" class="label label-info" style="background-color: black;font-size: 20px">GitHub</a>
+                <div class="glyphicon glyphicon-chevron-up title"> 热门博客</div>
+                <div class="content">
+                    <br/>
+                    <div th:each="view:${mostView}">
+                        <a th:href="@{/value(id = ${view.id})}" href="#" class="label label-default"
+                           th:text="${view.title}"></a>
+                        <span class="text-desc">[[${view.viewCount}]]个浏览</span>
+                    </div>
+                </div>
 
-            <br/>
-
-            <h2><span class="glyphicon glyphicon-phone" aria-hidden="true"></span> 如果你想联系我</h2>
-            <img th:src="@{/images/QQ.png}" src="../static/images/wechat.png" height="100" width="100" style="margin-left: 10px"/>
-            <img th:src="@{/images/wechat.png}" src="../static/images/QQ.png" height="100" width="100" style="margin-left: 20px;margin-right: 10px" />
+                <div class="glyphicon glyphicon-flag title"> 其他主页</div>
+                <div class="content">
+                    <br/>
+                    <a href="https://www.jianshu.com/u/c6a427a41c56" class="label label-info"
+                       style="background-color: #00d95a;font-size: 20px">简书</a>
+                    <br/>
+                    <br/>
+                    <a href="https://github.com/YzxUpUp" class="label label-info"
+                       style="background-color: black;font-size: 20px">GitHub</a>
+                </div>
+            </div>
         </div>
     </div>
     <nav aria-label="Page navigation">
         <ul class="pagination">
             <li>
-                <a th:if="${page.firstPage} == false" th:href="@{/(currentPage=${page.currentPage}-1)}" href="#" aria-label="Previous">
+                <a th:if="${page.firstPage} == false" th:href="@{/(currentPage=${page.currentPage}-1)}" href="#"
+                   aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <li th:classappend="${i.intValue() == page.currentPage}?'active'" th:each="i:${#numbers.sequence(1,page.totalPage)}">
+            <li th:classappend="${i.intValue() == page.currentPage}?'active'"
+                th:each="i:${#numbers.sequence(1,page.totalPage)}">
                 <a href="#" th:href="@{/(currentPage=${i.intValue()})}" th:text="${i.intValue()}"></a>
             </li>
             <li>
-                <a th:if="${page.lastpage} == false" th:href="@{/(currentPage=${page.currentPage}+1)}" href="#" aria-label="Next">
+                <a th:if="${page.lastpage} == false" th:href="@{/(currentPage=${page.currentPage}+1)}" href="#"
+                   aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
@@ -108,5 +143,25 @@
     <br/>
     <span class="text-desc">I hope everyone is happy every day</span>
 </div>
+<script type="text/javascript">
+    jQuery(".youtiy_slider .bd li").first().before(jQuery(".youtiy_slider .bd li").last());
+    jQuery(".youtiy_slider").hover(function () {
+        jQuery(this).find(".arrow").stop(true, true).fadeIn(300)
+    }, function () {
+        jQuery(this).find(".arrow").fadeOut(300)
+    });
+
+    // $(document).ready(function (e) {
+    //     var offset = 470;
+    //     $(window).on('scroll', function () {
+    //         if ($(this).scrollTop() > offset) {
+    //             $('.recommend').css('position', 'fixed');
+    //             $('.recommend').css('top', '0px');
+    //         } else {
+    //             $('.recommend').css('position', '');
+    //         }
+    //     });
+    // });
+</script>
 </body>
 </html>
