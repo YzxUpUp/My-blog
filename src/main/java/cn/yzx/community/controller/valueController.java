@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -24,7 +25,8 @@ public class valueController {
     @GetMapping("/value")
     public String showValue(@RequestParam(defaultValue = "1") int id,
                             Model model,
-                            HttpSession session) {
+                            HttpSession session,
+                            HttpServletRequest request) {
         //根据传入id，与comment表联合查询获取总评论数
         int commentCount = mapper.getCommentCount(id);
 
@@ -58,6 +60,11 @@ public class valueController {
         //装载标签数据
         String[] tags = blog.getTag().split(",");
         blog.setTags(tags);
+
+        String ua = request.getHeader("user-agent"); //通过ua判断是否为手机终端
+        if(ua.contains("Android") || ua.contains("iPhone") || ua.contains("iPod") || ua.contains("ios")) {
+            model.addAttribute("isPhone", 1);
+        }
 
         model.addAttribute("comments", comments);
         model.addAttribute("blog", blog);

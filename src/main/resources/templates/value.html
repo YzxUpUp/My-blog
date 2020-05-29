@@ -9,6 +9,9 @@
     <link rel="stylesheet" th:href="@{/css/me.css}" href="../static/css/me.css">
     <link rel="stylesheet" th:href="@{/css/editormd.min.css}" href="../static/css/editormd.min.css">
     <link rel="stylesheet" th:href="@{/css/editormd.preview.min.css}" href="../static/css/editormd.preview.min.css">
+    <link th:href="@{/css/style.css(v=2)}" href="../static/css/style.css?v=2" rel="stylesheet" type="text/css"
+          media="all">
+    <link th:href="@{/css/animate.min.css}" rel="stylesheet" href="../static/css/animate.min.css">
     <script th:src="@{/js/jquery-3.4.1.min.js}" src="../static/js/jquery-3.4.1.min.js"></script>
     <script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
     <script th:src="@{/js/editormd.min.js}" src="../static/js/editormd.min.js" type="application/javascript"></script>
@@ -16,6 +19,14 @@
     <script th:src="@{/js/lib/prettify.min.js}" src="../static/js/lib/prettify.min.js"></script>
     <script th:src="@{/js/me.js}" src="../static/js/me.js"></script>
     <script th:src="@{/js/bootstrapValidator.min.js}" src="../static/js/bootstrapValidator.min.js"></script>
+    <script th:src="@{/js/stickySidebar.js}" src="../static/js/stickySidebar.js"></script>
+    <script th:src="@{/js/wow.min.js}" src="../static/js/wow.min.js"></script>
+    <script>
+        if (!(/msie [6|7|8|9]/i.test(navigator.userAgent))) {
+            new WOW().init();
+        }
+        ;
+    </script>
 </head>
 <body style="background-color: #efefef">
 <!--导航栏-->
@@ -87,27 +98,43 @@
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <h2>标签</h2>
             <span th:each="tag:${blog.tags}"><span style="background-color: red" class="badge">[[${tag}]]</span> </span>
-            <h2>评论</h2>
-            <a class="btn btn-info" role="button" data-toggle="collapse" href="#listComment" aria-expanded="false"
-               aria-controls="listComment" style="margin-bottom: 10px">
-                展开评论
-            </a>
-            <div class="collapse" id="listComment">
-                <div class="well">
-                    <span class="warning" th:text="${nonComm}"></span>
-                    <div th:each="comment,i:${comments}">
-                        <div th:id="value+${i.count}" id="value" style="overflow:hidden" class="hiddenText"
-                             th:text="${comment.commentValue}"></div>
-                        <small>
-                            <a th:id="${i.count}" onclick="show(this)" href="#" id="detail">详情</a>
-                            <span class="text-desc">[[${comment.commenterName}]]</span>
-                            <span class="text-desc">[[${comment.commenterEmail}]]</span>
-                            <a th:if="${session.user} != null"
-                               th:href="@{/delComm(type=${comment.type},id=${comment.parentId})}" href="#">删除</a>
-                        </small>
+
+            <div class="model" th:classappend="${isPhone != 1} ? 'recommend'" style="margin-top: 20px">
+                <a class="btn btn-info" role="button" data-toggle="collapse" href="#listComment" aria-expanded="false"
+                   aria-controls="listComment" style="margin-bottom: 10px">
+                    展开评论
+                </a>
+                <div class="collapse" id="listComment">
+                    <div class="well">
+                        <span class="warning" th:text="${nonComm}"></span>
+                        <div th:each="comment,i:${comments}">
+                            <div th:id="value+${i.count}" id="value" style="overflow:hidden" class="hiddenText"
+                                 th:text="${comment.commentValue}"></div>
+                            <small>
+                                <a th:id="${i.count}" onclick="show(this)" href="#" id="detail">详情</a>
+                                <span class="text-desc">[[${comment.commenterName}]]</span>
+                                <span class="text-desc">[[${comment.commenterEmail}]]</span>
+                                <a th:if="${session.user} != null"
+                                   th:href="@{/delComm(type=${comment.type},id=${comment.parentId})}" href="#">删除</a>
+                            </small>
+                        </div>
                     </div>
                 </div>
+                <br/>
+                <a class="btn btn-info" onclick="pageScroll()">返回顶部</a>
             </div>
+            <script>
+                function pageScroll() {
+                    //把内容滚动指定的像素数（第一个参数是向右滚动的像素数，第二个参数是向下滚动的像素数）
+                    window.scrollBy(0, -10);
+                    //延时递归调用，模拟滚动向上效果
+                    scrolldelay = setTimeout('pageScroll()', 1);
+                    //获取scrollTop值，声明了DTD的标准网页取document.documentElement.scrollTop，否则取document.body.scrollTop；因为二者只有一个会生效，另一个就恒为0，所以取和值可以得到网页的真正的scrollTop值
+                    var sTop = document.documentElement.scrollTop + document.body.scrollTop;
+                    //判断当页面到达顶部，取消延时代码（否则页面滚动到顶部会无法再向下正常浏览页面）
+                    if (sTop == 0) clearTimeout(scrolldelay);
+                }
+            </script>
         </div>
     </div>
 </div>
@@ -154,5 +181,25 @@
     <br/>
     <span class="text-desc">I hope everyone is happy every day</span>
 </div>
+<script type="text/javascript">
+    jQuery(".youtiy_slider .bd li").first().before(jQuery(".youtiy_slider .bd li").last());
+    jQuery(".youtiy_slider").hover(function () {
+        jQuery(this).find(".arrow").stop(true, true).fadeIn(300)
+    }, function () {
+        jQuery(this).find(".arrow").fadeOut(300)
+    });
+
+    $(document).ready(function (e) {
+        var offset = 160;
+        $(window).on('scroll', function () {
+            if ($(this).scrollTop() > offset) {
+                $('.recommend').css('position', 'fixed');
+                $('.recommend').css('top', '0px');
+            } else {
+                $('.recommend').css('position', '');
+            }
+        });
+    });
+</script>
 </body>
 </html>
