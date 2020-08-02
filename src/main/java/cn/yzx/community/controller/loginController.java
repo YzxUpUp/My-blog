@@ -2,6 +2,7 @@ package cn.yzx.community.controller;
 
 import cn.yzx.community.mapper.userMapper;
 import cn.yzx.community.pojo.user;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +27,11 @@ public class loginController {
     public String checkLoginUser(@RequestParam String username,
                                  @RequestParam String password,
                                  HttpSession session){
-        user user = mapper.getUser(username,password);
+//        user user = mapper.getUser(username,password);
+        QueryWrapper<user> wrapper = new QueryWrapper<>();
+        wrapper.eq("username",username)
+                .eq("password",password);
+        user user = mapper.selectOne(wrapper);
         if(user != null){
             session.setAttribute("user",user);
             return "redirect:/";

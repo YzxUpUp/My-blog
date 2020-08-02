@@ -1,6 +1,7 @@
 package cn.yzx.community.mapper;
 
 import cn.yzx.community.pojo.blog;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -8,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface blogMapper {
+public interface blogMapper extends BaseMapper<blog> {
     void addBlog(blog b);
 
     List<blog> getAllBolg();
